@@ -4,6 +4,7 @@ arduinoSerialData= serial.Serial('/dev/ttyACM0',9600)
 root = Tk()
 def coke():
     arduinoSerialData.write('0,5,0')
+    print arduinoSerialData.('0,5,0')
 
 def sprite():
     arduinoSerialData.write('0,6,0')

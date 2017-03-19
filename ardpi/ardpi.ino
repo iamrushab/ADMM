@@ -15,6 +15,7 @@ void setup()
 
 void loop()
 {
+  delay(3000);
   if(Serial.available())
   {
     n=Serial.read()-'0';
