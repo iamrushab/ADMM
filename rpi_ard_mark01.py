@@ -8,13 +8,13 @@ def coke():
     
 
 def sprite():
-    ard.write('0,2,0')
+    ard.write('0,4,0')
 
 def fanta():
     ard.write('0,3,0')
 
 def tu():
-    ard.write('0,4,0')
+    ard.write('0,2,0')
 
 top=Label(root)
 top.pack()
