@@ -1,9 +1,9 @@
- int lr= 0;
- int rr=1;
- int cr=2;
- int tr=3;
- int fr=4;
- int sr=5;
+ int lr= 7;
+ int rr=5;
+ int cr=6;
+ int tr=2;
+ int fr=3;
+ int sr=4;
  
  int l;
  int r;
@@ -22,39 +22,49 @@ int n;
 void setup(){
   Serial.begin(9600);
   pinMode(lr, INPUT);
+  pinMode(rr, INPUT);
+  pinMode(cr, INPUT);
+  pinMode(tr, INPUT);
+  pinMode(fr, INPUT);
+  pinMode(sr, INPUT);
 }
 void loop(){
+  delay(70);
+  l=pulseIn(lr, HIGH);
+  Serial.println(l);
    if(l!=0){
-    step1.setSpeed(80);
-    step1.step(-10);
+    step1.setSpeed(200);
+    step1.step(10);
   }
   
   if(Serial.available())
   {
     n=Serial.read()-'0';
   }
-  delay(70);
-  l=pulseIn(lr, HIGH);
   switch(n)
   {
      case 1:
-     step1.setSpeed(80);
-     step1.step(1000);
+     step1.setSpeed(200);
+     step1.step(-400);
+     delay(5000);
      break;
    
     case 2:
-    step1.setSpeed(80);
-    step1.step(1500);
+    step1.setSpeed(200);
+    step1.step(-1450);
+    delay(5000);
     break;  
    
     case 3:
-     step1.setSpeed(80);
-     step1.step(1000);
-    break;
+     step1.setSpeed(200);
+     step1.step(-2550);
+     delay(5000);
+     break;
    
    case 4:
-    step1.setSpeed(80);
-    step1.step(1500);
+    step1.setSpeed(200);
+    step1.step(-3600);
+    delay(5000);
    break;    
   }
 
