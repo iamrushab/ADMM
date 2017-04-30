@@ -1,0 +1,88 @@
+import serial
+from Tkinter import *
+from mysql.connector import MySQLConnection, Error
+from python_mysql_dbconfig import read_db_config
+
+ard= serial.Serial('/dev/ttyACM0',9600)
+root = Tk()
+def insert(b,c):
+    insert_book(b,c)
+    
+def coke():
+    ard.write('0,1,0')
+    
+    b=1
+    c=20
+    insert(b,c)
+    
+def sprite():
+    ard.write('0,4,0')
+    b=4
+    c=20
+    insert(b,c)
+
+def fanta():
+    ard.write('0,3,0')
+    b=3
+    c=20
+    insert(b,c)
+
+def tu():
+    ard.write('0,2,0')
+    b=2
+    c=20
+    insert(b,c)
+
+top=Label(root)
+top.pack()
+bottomFrame=Label(root)
+bottomFrame.pack(side=BOTTOM)
+
+button1= Button(top, text="CocoCola", command=coke)
+button2= Button(top, text="Sprite", command=sprite)
+button3= Button(top, text="Fanta", command=fanta)
+button4= Button(top, text="Thumbs Up", command=tu)
+button1.pack(side=LEFT)
+button2.pack(side=RIGHT)
+button3.pack(side=RIGHT)
+button4.pack(side=RIGHT)
+
+
+def insert_book(drink, rupees):
+    query = "INSERT INTO test(drink, rupees) " \
+            "VALUES(%s,%s)"
+    args = (drink, rupees)
+ 
+    try:
+        db_config = read_db_config()
+        conn = MySQLConnection(**db_config)
+ 
+        cursor = conn.cursor()
+        cursor.execute(query, args)
+ 
+        if cursor.lastrowid:
+            print('Total Drinks Served', cursor.lastrowid)
+        else:
+            print('Finding the Number of total Drinks Served')
+ 
+        conn.commit()
+    except Error as error:
+        print(error)
+ 
+    finally:
+        cursor.close()
+        conn.close()
+ 
+
+def main():
+    d=0
+    root.mainloop()
+    while(1):
+   
+         #insert_book(d,d,d)
+      b=0
+if __name__ == '__main__':
+    main()
+
+
+
