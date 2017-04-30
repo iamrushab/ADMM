@@ -1,0 +1,147 @@
+ int lr= 26;
+ int rr=27;
+ int cr=22;
+ int tr=23;
+ int fr=24;
+ int sr=25;
+ int m1n = 4;
+ int m1p = 5;
+ int m2p = 2;
+ int m2n = 3;
+ int l;
+ int r;
+ int c;
+ int t;
+ int f;
+ int s;
+ int pl=46;
+ int pr=47;
+ #include <Stepper.h>
+const int stepsPerRevolution = 50; 
+Stepper step1(stepsPerRevolution, 8, 9, 10, 11);
+Stepper step2(stepsPerRevolution, 50, 51, 52, 53);
+//Stepper step2(stepsPerRevolution, 2, 3, 4, 5);
+int stepCount=0;
+int n;
+
+
+void setup(){
+  Serial.begin(9600);
+  pinMode(lr, INPUT);
+  pinMode(rr, INPUT);
+  pinMode(cr, INPUT);
+  pinMode(tr, INPUT);
+  pinMode(fr, INPUT);
+  pinMode(sr, INPUT);
+  pinMode(m1p, OUTPUT);
+  pinMode(m1n, OUTPUT);
+  pinMode(m2p, OUTPUT);
+  pinMode(m2n, OUTPUT);
+  pinMode(pl, OUTPUT);
+  pinMode(pr, OUTPUT);
+  
+  
+}
+void loop(){
+  delay(70);
+  l=pulseIn(lr, HIGH);
+  Serial.println(l);
+   if(l!=0){
+     digitalWrite(pl, LOW);
+     digitalWrite(pr, HIGH);
+    step1.setSpeed(100);
+    step1.step(100);
+    digitalWrite(m1n, LOW);
+  digitalWrite(m2n, LOW);
+  digitalWrite(m1p, LOW);
+  digitalWrite(m2p, LOW);
+  }
+  
+  if(Serial.available())
+  {
+    n=Serial.read()-'0';
+  }
+  switch(n)
+  {
+     case 1:
+     step1.setSpeed(200);
+     step1.step(-725);
+     //digitalWrite(m1n, HIGH);
+     //digitalWrite(m2p, HIGH);
+     //delay(15000);
+     //digitalWrite(m1n, LOW);
+     //digitalWrite(m2p, LOW);
+     delay(1000);
+     //digitalWrite(m1p, HIGH);
+     //digitalWrite(m2n, HIGH);
+     //delay(18000);
+     //digitalWrite(m1n, LOW);
+     //digitalWrite(m2n, LOW);
+     //digitalWrite(m1p, LOW);
+     //digitalWrite(m2p, LOW);
+     break;
+   
+    case 2:
+    step1.setSpeed(200);
+    step1.step(-1770);
+     //digitalWrite(m1n, HIGH);
+     //digitalWrite(m2p, HIGH);
+     //delay(15000);
+     //digitalWrite(m1n, LOW);
+     //digitalWrite(m2p, LOW);
+     delay(1000);
+     //digitalWrite(m1p, HIGH);
+     //digitalWrite(m2n, HIGH);
+     //delay(18000);
+     //digitalWrite(m1n, LOW);
+     //digitalWrite(m2n, LOW);
+     //digitalWrite(m1p, LOW);
+     //digitalWrite(m2p, LOW);
+     break;  
+   
+    case 3:
+     digitalWrite(pr, LOW);
+     digitalWrite(pl, HIGH);
+     step2.setSpeed(180);
+     step2.step(-2880);
+     digitalWrite(m1n, HIGH);
+     digitalWrite(m2p, HIGH);
+     delay(15000);
+     digitalWrite(m1n, LOW);
+     digitalWrite(m2p, LOW);
+     delay(1000);
+     digitalWrite(pl, LOW);
+     digitalWrite(m1p, HIGH);
+     digitalWrite(m2n, HIGH);
+     delay(18000);
+     digitalWrite(m1n, LOW);
+     digitalWrite(m2n, LOW);
+     digitalWrite(m1p, LOW);
+     digitalWrite(m2p, LOW);
+     
+     break;
+   
+   case 4:
+    digitalWrite(pr, LOW);
+    digitalWrite(pl, HIGH);
+    step2.setSpeed(150);
+    step2.step(-3930);
+    digitalWrite(m1n, HIGH);
+    digitalWrite(m2p, HIGH);
+    delay(13000);
+    digitalWrite(m1n, LOW);
+    digitalWrite(m2p, LOW);
+    delay(1000);
+    digitalWrite(pl, LOW);
+    digitalWrite(m1p, HIGH);
+    digitalWrite(m2n, HIGH);
+    delay(16000);
+    digitalWrite(m1n, LOW);
+    digitalWrite(m2n, LOW);
+    digitalWrite(m1p, LOW);
+    digitalWrite(m2p, LOW);
+     
+   break;    
+  }
+
+}
