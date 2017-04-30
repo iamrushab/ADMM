@@ -1,0 +1,78 @@
+<!DOCTYPE html>  
+ <html>  
+      <head>  
+           <title> ADMM Mark01 | Dashboard </title>  
+           <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>  
+           <script type="text/javascript">  
+           google.charts.load('current', {'packages':['corechart']});  
+           google.charts.setOnLoadCallback(drawLine);
+           google.charts.setOnLoadCallback(drawPiechart);  
+           function drawLine()  
+           {  
+                var data = google.visualization.arrayToDataTable([  
+                          ['Date', 'Total'],  
+                          <?php  
+                           $connect = mysqli_connect("localhost", "root", "kickass", "ADMM");  
+                           $query = "SELECT dt, SUM(rupees)  FROM test";  
+                           $result = mysqli_query($connect, $query);  
+                          while($row = mysqli_fetch_array($result))  
+                          {  
+                               echo "['".$row["dt"]."', ".$row["SUM(rupees)"]."],";  
+                          }  
+                          ?>  
+                     ]);  
+                var options = {  
+                      title: 'X axis is Timeline while Y axis represents Rupees',  
+                      //is3D:true,  
+                      width: 600,
+                      height: 400,
+                      bar: {groupWidth: "95%"},
+                      legend: {position: "none"},
+                     };  
+                var line = new google.visualization.LineChart(document.getElementById('first'));  
+                line.draw(data, options);  
+           } 
+           
+           function drawPiechart()  
+           {  
+                var data = google.visualization.arrayToDataTable([  
+                          ['Date', 'Total'],  
+                          <?php  
+                           $connect = mysqli_connect("localhost", "root", "kickass", "ADMM");  
+                           $query = "SELECT drink, count(*) as number  FROM test GROUP BY drink";  
+                           $result = mysqli_query($connect, $query);  
+                          while($row = mysqli_fetch_array($result))  
+                          {  
+                               echo "['".$row["drink"]."', ".$row["number"]."],";  
+                          }  
+                          ?>  
+                     ]);  
+                var options = {  
+                      title: 'In terms of Percentages',  
+                      //is3D:true,  
+                      width: 600,
+                      height: 400,
+                      bar: {groupWidth: "95%"},
+                      legend: {position: "none"},
+                     };  
+                var chart = new google.visualization.PieChart(document.getElementById('second'));  
+                chart.draw(data, options);  
+           } 
+           
+           
+           
+            
+           </script>  
+      </head>  
+      <body>  
+           <br /><br />  
+           <div style="width:1450px;">  
+                <h3 align="Center"> Current Stats of the Machine</h3>  
+                <br />  
+                <div style="font: 21px arial; padding: 10px 0 0 100px;">Datewise Account</div>
+                <div id="first"></div>
+                <div style="font: 21px arial; padding: 10px 0 0 100px;">Overall Consumption</div>
+	            <div id="second" style="width: 900px; height: 300px;"></div> 
+      </body>  
+ </html>
+
